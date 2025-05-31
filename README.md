@@ -9,3 +9,4 @@ Currently, two official plugins are available:
 # Shopee
 # Shopee
 # Shopee
+# template-react
