@@ -4,7 +4,7 @@
     "version": "0.0.0",
     "type": "module",
     "scripts": {
-        "dev": "vite",
+        "dev": "vite --host",
         "build": "vite build",
         "preview": "vite preview",
         "lint": "eslint --ext js,jsx src/",
@@ -13,8 +13,15 @@
         "prettier:fix": "prettier --write \"src/**/(*.jsx|*.js|*.css|*.scss)\""
     },
     "dependencies": {
+        "@heroicons/react": "^2.2.0",
+        "antd": "^5.25.3",
+        "firebase": "^11.8.1",
         "react": "^18.2.0",
-        "react-dom": "^18.2.0"
+        "react-dom": "^18.2.0",
+        "react-router-dom": "^7.6.0",
+        "react-toastify": "^11.0.5",
+        "swiper": "^11.2.7",
+        "uuid": "^11.1.0"
     },
     "devDependencies": {
         "@types/node": "^20.9.0",

@@ -1,0 +1,467 @@
+import { v4 as uuidv4 } from 'uuid';
+import { getDatabase, ref, set, get, push } from 'firebase/database';
+import app from './firebaseConfig';
+import { useEffect, useState } from 'react';
+
+    const uploadProducts = () => {
+        const db = getDatabase(app);
+        const productsRef = ref(db, 'shope/products'); 
+
+        const data = {};
+        products.forEach((product, index) => {
+            const id = uuidv4();
+            data[id] = product;
+        });
+
+        set(productsRef, data)
+            .then(() => {
+                console.log('Dữ liệu đã được thêm thành công!');
+            })
+            .catch((error) => {
+                console.error('Lỗi khi thêm dữ liệu: ', error);
+            });
+        };
+
+    // uploadProducts();
+
+
+    useEffect(() => {
+        const fetchdata = async () => {
+            const db = getDatabase(app);
+            const dbRef = ref(db, 'shope/products');
+            const snapshot = await get(dbRef);
+            if (snapshot.exists()) {
+                const dataObj = snapshot.val();
+                const dataWithId = Object.keys(dataObj).map((key) => ({
+                    id: key,
+                    ...dataObj[key],
+                }));
+                setData(dataWithId);
+                console.log(data);
+            } else {
+                alert('error');
+            }
+        };
+        fetchdata()
+    }, []);
+
+const products = [
+    {
+        name: 'Keo Tản Nhiệt CPU MX4 (20g / 8g / 4g)',
+        price: '38.000',
+        oldPrice: '48.000',
+        image: 'https://res.cloudinary.com/dlpgjjkfj/image/upload/v1747925073/image-1_slofek.webp',
+        sold: '3,3k',
+        discount: '-46%',
+        quantity: '260',
+        author: 'Tran Doan Store',
+        vanriant: [
+            {
+                color: 'Đen',
+            },
+            {
+                color: 'Trắng',
+            },
+            {
+                color: 'Vàng',
+            },
+            {
+                color: 'Bạc',
+            },
+        ],
+        imageList: [
+            {
+                image: 'https://res.cloudinary.com/dlpgjjkfj/image/upload/v1748251153/keo-tan-nhiet-2_ikzuzz.webp',
+            },
+            {
+                image: 'https://res.cloudinary.com/dlpgjjkfj/image/upload/v1748251153/keo-tan-nhiet-4_oxpbne.webp',
+            },
+            {
+                image: 'https://res.cloudinary.com/dlpgjjkfj/image/upload/v1748251152/keo-tan-nhiet-3_wlgcee.webp',
+            },
+            {
+                image: 'https://res.cloudinary.com/dlpgjjkfj/image/upload/v1748251151/keo-tan-nhiet-1_yb0jv7.webp',
+            },
+        ],
+    },
+    {
+        name: 'Đồ Bộ Mặc Nhà Hai Dây Quần Đùi Lụa Satin Hisexy MS12',
+        price: '89.000',
+        oldPrice: '125.000',
+        image: 'https://res.cloudinary.com/dlpgjjkfj/image/upload/v1747925073/image-6_tcyymt.webp',
+        sold: '8,9k',
+        discount: '-36%',
+        quantity: '220',
+        author: 'Hoang Soi Store',
+        vanriant: [
+            {
+                color: 'Đen',
+            },
+            {
+                color: 'Trắng',
+            },
+            {
+                color: 'Vàng',
+            },
+            {
+                color: 'Bạc',
+            },
+        ],
+        imageList: [
+            {
+                image: 'https://res.cloudinary.com/dlpgjjkfj/image/upload/v1748251204/quan-ao-nu-4_so12p2.webp',
+            },
+            {
+                image: 'https://res.cloudinary.com/dlpgjjkfj/image/upload/v1748251202/quan-ao-nu-3_sm7ldy.webp',
+            },
+            {
+                image: 'https://res.cloudinary.com/dlpgjjkfj/image/upload/v1748251200/quan-ao-nu-2_tqxxjq.webp',
+            },
+            {
+                image: 'https://res.cloudinary.com/dlpgjjkfj/image/upload/v1748251200/quan-ao-nu-1_c9gajl.webp',
+            },
+        ],
+    },
+    {
+        name: 'Điện thoại Apple iPhone 16 Pro Max 512GB',
+        price: '38.290.000',
+        oldPrice: '40.000.000₫',
+        image: 'https://res.cloudinary.com/dlpgjjkfj/image/upload/v1747925073/iphone-3_mks4ks.webp',
+        sold: '10,9k',
+        discount: '-7%',
+        quantity: '89',
+        author: 'Hoang Ha Mobile',
+        vanriant: [
+            {
+                color: 'Đen',
+            },
+            {
+                color: 'Trắng',
+            },
+            {
+                color: 'Vàng',
+            },
+            {
+                color: 'Bạc',
+            },
+        ],
+        imageList: [
+            {
+                image: 'https://res.cloudinary.com/dlpgjjkfj/image/upload/v1748251131/iphone-1_aode91.webp',
+            },
+            {
+                image: 'https://res.cloudinary.com/dlpgjjkfj/image/upload/v1748251131/iphone-2_yf3kzc.webp',
+            },
+            {
+                image: 'https://res.cloudinary.com/dlpgjjkfj/image/upload/v1748251132/iphone-3_rfecte.webpp',
+            },
+            {
+                image: 'https://res.cloudinary.com/dlpgjjkfj/image/upload/v1748251133/iphone-16-d_zkjou2.webp',
+            },
+        ],
+    },
+    {
+        name: 'Điện thoại Apple iPhone 16 128GB',
+        price: '21.490.000',
+        oldPrice: '23.999.000₫',
+        image: 'https://res.cloudinary.com/dlpgjjkfj/image/upload/v1747925074/iphone-5_naq8yo.webp',
+        sold: '4,3k',
+        discount: '-10%',
+        quantity: '198',
+        author: 'One Mobile',
+        vanriant: [
+            {
+                color: 'Đen',
+            },
+            {
+                color: 'Trắng',
+            },
+            {
+                color: 'Vàng',
+            },
+            {
+                color: 'Bạc',
+            },
+        ],
+        imageList: [
+            {
+                image: 'https://res.cloudinary.com/dlpgjjkfj/image/upload/v1748251133/iphone-16-c_fhsfag.webp',
+            },
+            {
+                image: 'https://res.cloudinary.com/dlpgjjkfj/image/upload/v1748251132/iphone-16-a_sxtdki.webp',
+            },
+            {
+                image: 'https://res.cloudinary.com/dlpgjjkfj/image/upload/v1748251132/iphone-16-b_zpgfg8.webp',
+            },
+            {
+                image: 'https://res.cloudinary.com/dlpgjjkfj/image/upload/v1748251133/iphone-16-d_zkjou2.webp',
+            },
+        ],
+    },
+    {
+        name: 'iPhone 15 Pro Max 256GB Chính Hãng VN/A',
+        price: '29.590.000',
+        oldPrice: '40.000.000₫',
+        image: 'https://res.cloudinary.com/dlpgjjkfj/image/upload/v1747925074/iphone-5_naq8yo.webp',
+        sold: '8,9k',
+        discount: '-32%',
+        quantity: '106',
+        author: 'Mobile City',
+        vanriant: [
+            {
+                color: 'Đen',
+            },
+            {
+                color: 'Trắng',
+            },
+            {
+                color: 'Vàng',
+            },
+            {
+                color: 'Bạc',
+            },
+        ],
+        imageList: [
+            {
+                image: 'https://res.cloudinary.com/dlpgjjkfj/image/upload/v1748251131/iphone-1_aode91.webp',
+            },
+            {
+                image: 'https://res.cloudinary.com/dlpgjjkfj/image/upload/v1748251131/iphone-2_yf3kzc.webp',
+            },
+            {
+                image: 'https://res.cloudinary.com/dlpgjjkfj/image/upload/v1748251132/iphone-3_rfecte.webpp',
+            },
+            {
+                image: 'https://res.cloudinary.com/dlpgjjkfj/image/upload/v1748251133/iphone-16-d_zkjou2.webp',
+            },
+        ],
+    },
+    {
+        name: 'Điện thoại Apple iPhone 16 256GB',
+        price: '23.490.000',
+        oldPrice: '25.999.000₫',
+        image: 'https://res.cloudinary.com/dlpgjjkfj/image/upload/v1747925074/iphone-5_naq8yo.webp',
+        sold: '1,3k',
+        discount: '-10%',
+        quantity: '118',
+        author: 'Ha Com',
+        vanriant: [
+            {
+                color: 'Đen',
+            },
+            {
+                color: 'Trắng',
+            },
+            {
+                color: 'Vàng',
+            },
+            {
+                color: 'Bạc',
+            },
+        ],
+        imageList: [
+            {
+                image: 'https://res.cloudinary.com/dlpgjjkfj/image/upload/v1748251133/iphone-16-c_fhsfag.webp',
+            },
+            {
+                image: 'https://res.cloudinary.com/dlpgjjkfj/image/upload/v1748251132/iphone-16-a_sxtdki.webp',
+            },
+            {
+                image: 'https://res.cloudinary.com/dlpgjjkfj/image/upload/v1748251132/iphone-16-b_zpgfg8.webp',
+            },
+            {
+                image: 'https://res.cloudinary.com/dlpgjjkfj/image/upload/v1748251133/iphone-16-d_zkjou2.webp',
+            },
+        ],
+    },
+    {
+        name: 'iPhone 16 Pro Max 512GB Chính Hãng VN/A',
+        price: '33.590.000',
+        oldPrice: '47.999.000₫',
+        image: 'https://res.cloudinary.com/dlpgjjkfj/image/upload/v1747925074/iphone-5_naq8yo.webp',
+        sold: '3,3k',
+        discount: '-32%',
+        quantity: '198',
+        author: 'The Gioi Di Dong',
+        vanriant: [
+            {
+                color: 'Đen',
+            },
+            {
+                color: 'Trắng',
+            },
+            {
+                color: 'Vàng',
+            },
+            {
+                color: 'Bạc',
+            },
+        ],
+        imageList: [
+            {
+                image: 'https://res.cloudinary.com/dlpgjjkfj/image/upload/v1748251133/iphone-16-c_fhsfag.webp',
+            },
+            {
+                image: 'https://res.cloudinary.com/dlpgjjkfj/image/upload/v1748251132/iphone-16-a_sxtdki.webp',
+            },
+            {
+                image: 'https://res.cloudinary.com/dlpgjjkfj/image/upload/v1748251132/iphone-16-b_zpgfg8.webp',
+            },
+            {
+                image: 'https://res.cloudinary.com/dlpgjjkfj/image/upload/v1748251133/iphone-16-d_zkjou2.webp',
+            },
+        ],
+    },
+    {
+        name: 'Bộ Đồ Nữ Thể Thao Họa Tiết Thêu Ngực Chất Liệu Cotton Co Giãn 4 Chiều',
+        price: '135.000',
+        oldPrice: '300.000',
+        image: 'https://res.cloudinary.com/dlpgjjkfj/image/upload/v1747925073/image-6_tcyymt.webp',
+        sold: '28,6k',
+        discount: '-55%',
+        quantity: '89',
+        author: 'Ha My Store',
+        vanriant: [
+            {
+                color: 'Đen',
+            },
+            {
+                color: 'Trắng',
+            },
+            {
+                color: 'Vàng',
+            },
+            {
+                color: 'Bạc',
+            },
+        ],
+        imageList: [
+            {
+                image: 'https://res.cloudinary.com/dlpgjjkfj/image/upload/v1748252546/ao-theu-1_qdhizq.webp',
+            },
+            {
+                image: 'https://res.cloudinary.com/dlpgjjkfj/image/upload/v1748252563/ao-theu-4_csp9sh.webp',
+            },
+            {
+                image: 'https://res.cloudinary.com/dlpgjjkfj/image/upload/v1748252559/ao-theu-2_ovuii0.webp',
+            },
+            {
+                image: 'https://res.cloudinary.com/dlpgjjkfj/image/upload/v1748252561/ao-theu-3_mhhfst.webp',
+            },
+        ],
+    },
+    {
+        name: 'iPhone 16 Pro Max 512GB Chính Hãng VN/A',
+        price: '31.590.000',
+        oldPrice: '45.999.000₫',
+        image: 'https://res.cloudinary.com/dlpgjjkfj/image/upload/v1747925074/iphone-5_naq8yo.webp',
+        sold: '6,3k',
+        discount: '-32%',
+        quantity: '198',
+        author: 'The Gioi Di Dong',
+        vanriant: [
+            {
+                color: 'Đen',
+            },
+            {
+                color: 'Trắng',
+            },
+            {
+                color: 'Vàng',
+            },
+            {
+                color: 'Bạc',
+            },
+        ],
+        imageList: [
+            {
+                image: 'https://res.cloudinary.com/dlpgjjkfj/image/upload/v1748251133/iphone-16-c_fhsfag.webp',
+            },
+            {
+                image: 'https://res.cloudinary.com/dlpgjjkfj/image/upload/v1748251132/iphone-16-a_sxtdki.webp',
+            },
+            {
+                image: 'https://res.cloudinary.com/dlpgjjkfj/image/upload/v1748251132/iphone-16-b_zpgfg8.webp',
+            },
+            {
+                image: 'https://res.cloudinary.com/dlpgjjkfj/image/upload/v1748251133/iphone-16-d_zkjou2.webp',
+            },
+        ],
+    },
+    {
+        name: 'Áo Tay Hến Cộc Khuy Bấm - Quần Sóoc',
+        price: '199.999',
+        oldPrice: '260.000',
+        image: 'https://res.cloudinary.com/dlpgjjkfj/image/upload/v1747925074/image-8_dqr6im.webp',
+        sold: '38,1k',
+        discount: '-23%',
+        quantity: '130',
+        author: 'Quanh Dev Store',
+        vanriant: [
+            {
+                color: 'Đen',
+            },
+            {
+                color: 'Trắng',
+            },
+            {
+                color: 'Vàng',
+            },
+            {
+                color: 'Bạc',
+            },
+        ],
+        imageList: [
+            {
+                image: 'https://res.cloudinary.com/dlpgjjkfj/image/upload/v1748252546/ao-theu-1_qdhizq.webp',
+            },
+            {
+                image: 'https://res.cloudinary.com/dlpgjjkfj/image/upload/v1748252563/ao-theu-4_csp9sh.webp',
+            },
+            {
+                image: 'https://res.cloudinary.com/dlpgjjkfj/image/upload/v1748252559/ao-theu-2_ovuii0.webp',
+            },
+            {
+                image: 'https://res.cloudinary.com/dlpgjjkfj/image/upload/v1748252561/ao-theu-3_mhhfst.webp',
+            },
+        ],
+    },
+    {
+        name: 'iPhone 15 Pro Max 128GB Chính Hãng VN/A',
+        price: '26.590.000',
+        oldPrice: '39.999.000₫',
+        image: 'https://res.cloudinary.com/dlpgjjkfj/image/upload/v1747925074/iphone-5_naq8yo.webp',
+        sold: '9,3k',
+        discount: '-32%',
+        quantity: '118',
+        author: 'The Gioi Di Dong',
+        vanriant: [
+            {
+                color: 'Đen',
+            },
+            {
+                color: 'Trắng',
+            },
+            {
+                color: 'Vàng',
+            },
+            {
+                color: 'Bạc',
+            },
+        ],
+        imageList: [
+            {
+                image: 'https://res.cloudinary.com/dlpgjjkfj/image/upload/v1748251133/iphone-16-c_fhsfag.webp',
+            },
+            {
+                image: 'https://res.cloudinary.com/dlpgjjkfj/image/upload/v1748251132/iphone-16-a_sxtdki.webp',
+            },
+            {
+                image: 'https://res.cloudinary.com/dlpgjjkfj/image/upload/v1748251132/iphone-16-b_zpgfg8.webp',
+            },
+            {
+                image: 'https://res.cloudinary.com/dlpgjjkfj/image/upload/v1748251133/iphone-16-d_zkjou2.webp',
+            },
+        ],
+    },
+];
