@@ -8,6 +8,7 @@ import 'swiper/css/pagination';
 
 function index() {
     return (
+        <div className='w-full max-w-screen-xl mx-auto'>
         <Swiper
             modules={[Autoplay, Pagination]}
             slidesPerView={1}
@@ -57,6 +58,7 @@ function index() {
                 />
             </SwiperSlide>
         </Swiper>
+        </div>
     );
 }
 

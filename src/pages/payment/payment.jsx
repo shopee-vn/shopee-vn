@@ -16,7 +16,7 @@ import {
     ArrowLeftIcon,
 } from '@heroicons/react/24/outline';
 import { ToastContainer, toast } from 'react-toastify';
-
+import voucherSale from '../../components/dataVoucher/dataVoucher';
 import { Header } from '../../components/layout/header';
 import { VoucherModal } from '../../components/voucherModal';
 import { ProductCardPayment } from '../../components/productCardPayment';
@@ -50,15 +50,6 @@ function Payment() {
     };
     const handleOrder = () => {
         navigate('/paymentSuccess', { state: { showToast: true } });
-    };
-
-    const voucherSale = {
-        giam1: 50,
-        giam2: 60,
-        giam3: 70,
-        giam4: 80,
-        giam5: 90,
-        giam6: 100,
     };
 
     const voucherData = [

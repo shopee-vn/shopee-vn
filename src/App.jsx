@@ -12,6 +12,8 @@ import app from './firebaseConfig';
 import { useEffect, useState } from 'react';
 import { PaymentSuccess } from './components/paymentSuccess';
 import { ScrollToTop } from './components/scrollToTop';
+import { Login } from './pages/login';
+import { Register } from './pages/register';
 
 function App() {
 
@@ -414,6 +416,8 @@ function App() {
             <Route path="/payment/:id" element={<Payment />} />
             <Route path="/paymentSuccess" element={<PaymentSuccess />} />
             <Route path="/searchResult" element={<SearchResult />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
             <Route path="*" element={<PageError />} />
         </Routes>
         </>
